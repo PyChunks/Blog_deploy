@@ -30,4 +30,19 @@ resource "linode_instance" "web_blog" {
 
   root_pass = var.api_token
 
+  provisioner "remote-exec" {
+    inline = ["echo 'Hello World'"]
+
+    connection {
+      type        = "ssh"
+      user        = "root"
+      password    = self.root_pass
+      host        = self.ip_address
+      private_key = file(var.private_key_path)    
+    }
+  }
+
+  provisioner "local-exec"{
+    command = "echo -e '[blog]\n${self.ip_address}' > inventory && ansible-playbook -i inventory --private-key='${var.private_key_path}' --extra-vars 'ansible_user=root' provision.yml"
+  }
 }
