@@ -43,6 +43,6 @@ resource "linode_instance" "web_blog" {
   }
 
   provisioner "local-exec"{
-    command = "echo -e '[blog]\n${self.ip_address}' > inventory && ansible-playbook -i inventory --private-key='${var.private_key_path}' --extra-vars 'ansible_user=root' provision.yml"
+    command = "ssh-keyscan ${self.ip_address} >> ~/.ssh/known_hosts && echo -e '[blog]\n${self.ip_address}' > inventory && ansible-playbook -i inventory --private-key='${var.private_key_path}' --extra-vars 'ansible_user=root' provision.yml"
   }
 }
