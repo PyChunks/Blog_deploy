@@ -1,0 +1,24 @@
+---
+  - name: Get variables file
+    include_vars: variables.yml
+
+  - name: set A record
+    community.general.cloudflare_dns:
+      zone: "{{ domain }}"
+      type: A
+      value: "{{ remote_ip }}"
+      account_email: "{{ user_email }}"
+      api_token: "{{ secret_token }}"
+      solo: true
+      state: present
+
+  - name: set CNAME record 
+    community.general.cloudflare_dns:
+      zone: "{{ domain }}"
+      record: www
+      type: CNAME
+      value: "{{ domain }}"
+      account_email: "{{ user_email }}"
+      api_token: "{{ secret_token }}"
+      solo: true
+      state: present
