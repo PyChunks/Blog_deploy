@@ -1,9 +1,5 @@
 ---
 - hosts: all
-
-  tasks:
-    - name: Install Docker
-      package:
-        name: docker
-        state: present
+  roles:
+  - deploy_nginx
 
