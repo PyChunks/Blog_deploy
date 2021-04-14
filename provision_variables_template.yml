@@ -1,0 +1,14 @@
+validate_email:
+domain:
+user_email:
+secret_token:
+jenkins:
+  host:
+  user:
+  passwd:
+  token:
+  job:
+promtail_client_ip_or_domain:
+ssh_user:
+ssh_user_pass:
+pubkey_path:
