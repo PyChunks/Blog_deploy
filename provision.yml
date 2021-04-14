@@ -8,7 +8,7 @@
     - security_strenghtening
     - cloudflare_dns
     - deploy_nginx
-    # - certbot_nginx
+    - certbot_nginx
     - jenkins_build_trigger
     - promtail
 
