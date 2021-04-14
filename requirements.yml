@@ -1,0 +1,25 @@
+collections:
+  - name: ansible.posix
+  - name: community.general
+
+roles:
+  - name: certbot_nginx
+    src: https://github.com/PyChunks/ansible_role_certbot_nginx.git 
+
+  - name: cloudflare_dns
+    src: https://github.com/PyChunks/ansible_role_cloudflare_dns.git
+
+  - name: deploy_nginx
+    src: https://github.com/PyChunks/ansible_role_nginx_deploy.git
+
+  - name: jenkins_build_trigger
+    src: https://github.com/PyChunks/ansible_role_jenkins_build_trigger.git
+
+  - name: promtail
+    src: https://github.com/PyChunks/ansible_role_promtail.git
+
+  - name: security_strenghtening
+    src: https://github.com/PyChunks/ansible_role_security_strenghtening.git
+
+
+

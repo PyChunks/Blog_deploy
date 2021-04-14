@@ -1,6 +1,14 @@
 ---
 - hosts: all
+
+  vars_files:
+    - provision_variables.yml
+
   roles:
-  - dns_setup
-  - deploy_nginx
+    - security_strenghtening
+    - cloudflare_dns
+    - deploy_nginx
+    # - certbot_nginx
+    - jenkins_build_trigger
+    - promtail
 

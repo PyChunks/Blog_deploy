@@ -35,3 +35,4 @@ terraform.rc
 /inventory
 /variables.tf
 /.terraform.lock.hcl
+/roles/*

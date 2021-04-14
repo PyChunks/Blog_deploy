@@ -12,10 +12,6 @@ terraform {
       source = "linode/linode"
       version = "1.14.3"
     }
-    # namecheap = {
-    #   source  = "robgmills/namecheap"
-    #   version = "1.7.0"
-    # }
   }
 }
 
@@ -48,7 +44,7 @@ resource "linode_instance" "web_blog" {
 
 
   provisioner "local-exec"{
-    command = "sed -i '/remote_ip/d' ./roles/dns_setup/vars/variables.yml && echo -e '\nremote_ip: ${self.ip_address}' >> ./roles/dns_setup/vars/variables.yml"
+    command = "sed -i '/remote_ip/d' ./provision_variables.yml && echo -e '\nremote_ip: ${self.ip_address}' >> ./provision_variables.yml"
   }
 
   provisioner "local-exec"{
@@ -56,19 +52,3 @@ resource "linode_instance" "web_blog" {
   }
 }
 
-# provider "namecheap" {
-#   username = "your_username" # Also set by env variable `NAMECHEAP_USERNAME`
-#   api_user = "your_username" # Same as username; also set by env variable `NAMECHEAP_API_USER`
-#   token = "your_token" # Also set by env variable `NAMECHEAP_TOKEN`
-#   ip = "your.ip.address.here" # Also set by env variable `NAMECHEAP_IP`
-#   use_sandbox = false # Toggle for testing/sandbox mode; Also set by env variable `NAMECHEAP_USE_SANDBOX`
-# }
-
-# # Create a DNS A Record for a domain you own
-# resource "namecheap_record" "www-example-com" {
-#   name = "www"
-#   domain = "example.com"
-#   address = "127.0.0.1"
-#   mx_pref = 10
-#   type = "A"
-# }
