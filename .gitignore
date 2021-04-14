@@ -34,5 +34,6 @@ override.tf.json
 terraform.rc
 /inventory
 /variables.tf
+/provision_variables.tf
 /.terraform.lock.hcl
 /roles/*
