@@ -11,4 +11,3 @@
     - certbot_nginx
     - jenkins_build_trigger
     - promtail
-
