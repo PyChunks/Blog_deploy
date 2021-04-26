@@ -1,5 +1,6 @@
 variable "api_token" {
   type = string
+  sensitive = true
   default = ""
 }
 
@@ -11,12 +12,12 @@ variable "public_key" {
 
 variable "private_key_path" {
   type = string
-  default = ""
+  default = "~/.ssh/id_rsa"
 }
 
 variable "server_name" {
   type = string
-  default = ""
+  default = "example.com"
 }
 
 
