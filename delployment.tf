@@ -1,9 +1,5 @@
 ## Lacking in documentation:
 ## Import provider from Terraform
-
-## Lacking in documentation:
-## Import provider from Terraform
-## New in version .13
 ## New in version .13
 
 terraform {
@@ -20,16 +16,17 @@ provider "linode" {
 }
 
 
-resource "linode_instance" "web_blog" {
-  label = "web_blog"
-  image = "linode/ubuntu20.04"
-  region = "us-east"
-  type = "g6-nanode-1"
+resource "linode_instance" "web_server" {
+  label = var.server_name
+  image = var.server_image
+  region = var.server_region
+  type = var.server_type
 
   authorized_keys = [var.public_key]
 
   root_pass = var.api_token
 
+# Wait for server to be fully up and sshd to be listening to connections
   provisioner "remote-exec" {
     inline = ["echo 'Hello World'"]
 
@@ -42,13 +39,14 @@ resource "linode_instance" "web_blog" {
     }
   }
 
-
+# Setting up various files to run  playbook smootly
   provisioner "local-exec"{
-    command = "sed -i '/remote_ip/d' ./provision_variables.yml && echo -e '\nremote_ip: ${self.ip_address}' >> ./provision_variables.yml"
+    command = "sed -i '/remote_ip/d' ./provision_variables.yml && echo -e '\nremote_ip: ${self.ip_address}' >> ./provision_variables.yml && ssh-keyscan ${self.ip_address} >> ~/.ssh/known_hosts && echo -e '[blog]\n${self.ip_address}' > inventory"
   }
 
+# Run playbook
   provisioner "local-exec"{
-    command = "ssh-keyscan ${self.ip_address} >> ~/.ssh/known_hosts && echo -e '[blog]\n${self.ip_address}' > inventory && ansible-playbook -i inventory --private-key='${var.private_key_path}' --extra-vars 'ansible_user=root' provision.yml"
+    command = "ansible-playbook -i inventory --private-key='${var.private_key_path}' --extra-vars 'ansible_user=root' provision.yml"
   }
 }
 
