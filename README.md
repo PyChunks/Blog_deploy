@@ -6,8 +6,10 @@ Terraform project that automatically deploys a Nginx webserver as a Linode VPS. 
 Requirements
 ------------
 
-| Ansible | 2.9 |
-| Git     |     |
+| Dependency | Version    |
+| :--------- | ---------: |
+| Ansible    | 2.9        |
+| Git        |            |
 
 This terraform project uses `Ansible` to provision the remote server. 
 
