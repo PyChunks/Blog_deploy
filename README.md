@@ -2,8 +2,10 @@ Web Server automatic deployment
 ===============================
 
 Terraform project that automatically deploys a Nginx webserver as a Linode VPS. The provisioner also implements basic webserver security and configuration
+
 Requirements
 ------------
+
 | Ansible | 2.9 |
 | Git     |     |
 
