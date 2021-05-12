@@ -44,6 +44,11 @@ resource "linode_instance" "web_server" {
     command = "sed -i '/remote_ip/d' ./provision_variables.yml && echo -e '\nremote_ip: ${self.ip_address}' >> ./provision_variables.yml && ssh-keyscan ${self.ip_address} >> ~/.ssh/known_hosts && echo -e '[blog]\n${self.ip_address}' > inventory"
   }
 
+# Install Ansible Playbook dependencies
+  provisioner "local-exec"{
+    command = "ansible-galaxy install -r requirements.yml"
+  }
+
 # Run playbook
   provisioner "local-exec"{
     command = "ansible-playbook -i inventory --private-key='${var.private_key_path}' --extra-vars 'ansible_user=root' provision.yml"
