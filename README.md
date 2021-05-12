@@ -7,6 +7,7 @@ Requirements
 ------------
 
 | Ansible | 2.9 |
+|---------|-----|
 | Git     |     |
 
 This terraform project uses `Ansible` to provision the remote server. 
